@@ -8,8 +8,7 @@ require'lualine'.setup{
 		theme = 'codedark',
 	},
 	extensions = {
-		'toggleterm',
-		'nvim-tree'
+		'toggleterm'
 	},
 	sections = {
 		lualine_a = {'mode'},
@@ -17,7 +16,7 @@ require'lualine'.setup{
 	    lualine_c = {'filename'},
 		lualine_x = {'encoding', 'fileformat', 'filetype'},
 		lualine_y = {'location'},
-		lualine_z = {'hostname'}
+		lualine_z = {'g:coc_status'}
   },
 }
 

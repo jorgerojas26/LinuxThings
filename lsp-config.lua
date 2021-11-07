@@ -6,6 +6,7 @@ local lspkind = require('lspkind')
 local press = function(key)
       vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes(key, true, true, true), "n", true)
 end
+
 local has_any_words_before = function()
       if vim.api.nvim_buf_get_option(0, "buftype") == "prompt" then
         return false
@@ -74,12 +75,12 @@ cmp.setup({
         }),
   },
     sources = cmp.config.sources({
-      { name = 'nvim_lsp' },
-       { name = 'ultisnips' },
+      { name = 'nvim_lsp', max_item_count= 10 },
+       { name = 'ultisnips', max_item_count= 20 },
 	  --{ name = 'cmp_tabnine' },
-      { name = 'nvim_lua' },
-      { name = 'buffer' },
-      { name = 'path' },
+      { name = 'nvim_lua', max_item_count= 10 },
+      { name = 'buffer', max_item_count= 10 },
+      { name = 'path', max_item_count= 10 },
     }),
 	experimental = {
 		native_menu = false,
@@ -99,7 +100,7 @@ local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protoco
         ts_utils.setup {
             debug = false,
             disable_commands = false,
-            enable_import_on_completion = false,
+            enable_import_on_completion = true,
 
             -- import all
             import_all_timeout = 5000, -- ms
@@ -145,7 +146,7 @@ vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
   vim.lsp.diagnostic.on_publish_diagnostics, {
     -- This will disable virtual text, like doing:
     -- let g:diagnostic_enable_virtual_text = 0
-    virtual_text = false,
+    virtual_text = true,
 	underline = false,
 
     -- This is similar to:

@@ -1,6 +1,6 @@
 call plug#begin('~/.vim/plugged')
 Plug 'kyazdani42/nvim-web-devicons' " for file icons
-Plug 'kyazdani42/nvim-tree.lua'
+" Plug 'kyazdani42/nvim-tree.lua'
 
 Plug 'nvim-telescope/telescope.nvim'
 Plug 'nvim-telescope/telescope-project.nvim'
@@ -8,24 +8,6 @@ Plug 'gruvbox-community/gruvbox'
 Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}  " We recommend updating the parsers on update
 
-Plug 'neovim/nvim-lspconfig'
-" Plug 'glepnir/lspsaga.nvim'
-Plug 'onsails/lspkind-nvim'
-
-" COMPLETION
-" Plug 'ms-jpq/coq_nvim'
-
-Plug 'hrsh7th/nvim-cmp'
-Plug 'hrsh7th/cmp-buffer'
-Plug 'hrsh7th/cmp-path'
-Plug 'hrsh7th/cmp-nvim-lua'
-Plug 'hrsh7th/cmp-nvim-lsp'
-Plug 'tzachar/cmp-tabnine', { 'do': './install.sh' }
-Plug 'SirVer/ultisnips'
-Plug 'quangnguyen30192/cmp-nvim-ultisnips'
-
-
-" Plug 'ms-jpq/coq.artifacts', {'branch': 'artifacts'}
 Plug 'windwp/nvim-ts-autotag'
 Plug 'windwp/nvim-autopairs'
 Plug 'nvim-lualine/lualine.nvim'
@@ -54,10 +36,38 @@ Plug 'rhysd/clever-f.vim'
 
 " GIT
 " Plug 'TimUntersberger/neogit'
-Plug 'lewis6991/gitsigns.nvim'
+" Plug 'lewis6991/gitsigns.nvim'
 Plug 'tpope/vim-fugitive'
 
 Plug 'airblade/vim-rooter'
+" Plug 'mg979/vim-visual-multi', {'branch': 'master'}
+Plug 'ThePrimeagen/harpoon'
+Plug 'SirVer/ultisnips'
+
+" LSP
+" ----- COC.nvim ------------------------------
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
+Plug 'fannheyward/telescope-coc.nvim'
+
+" ---------------------------------------------
+
+" ---- BUILT IN LSP --------------------
+
+" Plug 'neovim/nvim-lspconfig'
+" Plug 'glepnir/lspsaga.nvim'
+" Plug 'onsails/lspkind-nvim'
+" Plug 'ms-jpq/coq_nvim'
+" Plug 'ms-jpq/coq.artifacts', {'branch': 'artifacts'}
+
+"Plug 'hrsh7th/nvim-cmp'
+"Plug 'hrsh7th/cmp-buffer'
+"Plug 'hrsh7th/cmp-path'
+"Plug 'hrsh7th/cmp-nvim-lua'
+"Plug 'hrsh7th/cmp-nvim-lsp'
+"Plug 'tzachar/cmp-tabnine', { 'do': './install.sh' }
+"Plug 'quangnguyen30192/cmp-nvim-ultisnips'
+" ----------------------------------------
+
 
 
 call plug#end()
