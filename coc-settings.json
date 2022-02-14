@@ -1,40 +1,43 @@
 {
-  "coc.preferences.formatOnSaveFiletypes": ["javascript", "javascriptreact", "vue"],
-    "suggest.completionItemKindLabels": {
-    "keyword":  "\uf1de", 
-    "variable": "\ue79b", 
-    "value": "\uf89f", 
-    "operator": "\u03a8", 
-    "constructor": "\uf0ad", 
-    "function": "\u0192", 
-    "reference": "\ufa46", 
-    "constant": "\uf8fe", 
-    "method": "\uf09a", 
-    "struct": "\ufb44", 
-    "class": "\uf0e8", 
-    "interface": "\uf417", 
-    "text": "\ue612", 
-    "enum": "\uf02c", 
-    "enumMember": "\uf02b", 
-    "module": "\uf40d", 
-    "color": "\ue22b", 
-    "property": "\ue624", 
-    "field": "\uf9be", 
-    "unit": "\uf475", 
-    "event": "\ufacd", 
-    "file": "\uf15b", 
-    "folder": "\uf07b", 
-    "snippet": "\ue60b", 
-    "typeParameter": "\uf728", 
-    "default": "\uf29c" 
-  },
-  "diagnostic.errorSign": "✘",
-  "diagnostic.warningSign": "",
-  "diagnostic.infoSign": "",
-  "diagnostic.enableMessage": "jump",
+  "coc.preferences.formatOnSaveFiletypes": ["javascript", "vue", "json", "lua"],
+  "suggest.maxCompleteItemCount": 50,
+  "suggest.numberSelect": true,
+  "suggest.enablePreselect": true,
+  "javascript.suggest.autoImports": true,
+  "suggest.removeDuplicateItems": true,
+  "suggest.autoTrigger": "always",
   "diagnostic.virtualText": true,
   "diagnostic.virtualTextCurrentLineOnly": false,
-  "javascript.autoClosingTags": true,
-  "typescript.autoClosingTags": true,
-  "explorer.icon.enableNerdfont": true
+  "codeLens.enable": true,
+  "diagnostic.errorSign": "✘",
+  "diagnostic.infoSign": "ℹ",
+  "diagnostic.hintSign": "➤",
+  "suggest.completionItemKindLabels": {
+    "keyword": "\uf1de", //  sliders
+    "variable": "\ue79b", //  isometric box
+    "value": "\uf89f", //  digits 123
+    "operator": "\u03a8", // Ψ greek letter psi
+    "constructor": "\uf0ad", //  wrench
+    "function": "\u0192", // ƒ latin small letter F
+    "reference": "\ufa46", // 渚 retweet symbol
+    "constant": "\uf8fe", //  greek letter pi
+    "method": "\uf09a", //  facebook "f"
+    "struct": "\ufb44", // פּ file tree
+    "class": "\uf0e8", //  hierarchy / site map
+    "interface": "\uf417", //  git commit / line interrupted by circle
+    "text": "\ue612", //  left-justified lines
+    "enum": "\uf02c", //  pair of tags
+    "enumMember": "\uf02b", //  tag
+    "module": "\uf40d", //  code file / page showing angle brackets
+    "color": "\ue22b", //  palette
+    "property": "\ue624", //  predator dots
+    "field": "\uf9be", // 料left-justified sorted lines
+    "unit": "\uf475", //  negative-space ellipsis
+    "event": "\ufacd", // 鬒clock alert / clock with exclamation mark
+    "file": "\uf15b", //  file / blank page
+    "folder": "\uf07b", //  folder
+    "snippet": " ",
+    "typeParameter": "\uf728", //  file presentation box
+    "default": "\uf29c" //  question mark in circle
+  }
 }
