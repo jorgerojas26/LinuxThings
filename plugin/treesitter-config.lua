@@ -28,7 +28,7 @@ require'nvim-treesitter.configs'.setup {
         jsx_fragment = '{/* %s */}',
         jsx_attribute = '// %s',
         comment = '// %s'
-      }
+      },
     }
   },
   incremental_selection = {
@@ -41,13 +41,13 @@ require'nvim-treesitter.configs'.setup {
     },
   },
   indent = {
-    enable = true
+    enable = false
   },
   autotag = {
     enable = true,
   },
   matchup = {
-    enable = true,
+    enable = false,
   },
   ensure_installed = {'vue', 'html', 'json', 'javascript', 'typescript', 'lua', 'org'}, -- one of "all", "maintained" (parsers with maintainers), or a list of languages
   ignore_install = {'vue', 'yaml', 'tlaplus'},

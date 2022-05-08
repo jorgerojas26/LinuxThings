@@ -37,8 +37,8 @@ nmap('<C-Down>', ':resize -5<CR>')
 nmap('<leader>cc', ":'<,'>w !clip.exe<CR>")
 vmap('J',':m \'>+1<CR>gv=gv')
 vmap('K',':m \'>-2<CR>gv=gv')
-imap('jk', '<Esc>')
-imap('kj', '<Esc>')
+--[[ imap('jk', '<Esc>')
+imap('kj', '<Esc>') ]]
 
 -- TELESCOPE --
 nmap('gd',':Telescope lsp_definitions<CR>')
@@ -48,29 +48,34 @@ nmap('<leader>rn', ':lua vim.lsp.buf.rename()<CR>')
 nmap('K', ':lua vim.lsp.buf.hover()<CR>')
 nmap('<C-K>', ':lua vim.lsp.buf.signature_help()<CR>')
 nmap('<leader>d', ':lua vim.lsp.diagnostic.show_line_diagnostics()<CR>')
-nmap('<leader>ca',':Telescope lsp_code_actions theme=cursor<CR>')
-nmap('<leader>ff',':Telescope find_files theme=dropdown previewer=false <CR>')
+nmap('<leader>ca',':lua vim.lsp.buf.code_action()<CR>')
+--nmap('<leader>ff',':Telescope find_files theme=dropdown previewer=false <CR>')
+nmap('<leader>ff',':Telescope git_files theme=dropdown previewer=false hidden=true no_ignore=true<CR>')
+nmap('<leader>fh',':Telescope oldfiles theme=dropdown previewer=false <CR>')
 --nmap('<leader>fw','<cmd>lua require("telescope").extensions.arecibo.websearch()  <CR>')
 nmap('<leader>fl',':Telescope resume <CR>')
 nmap('<leader>ft',':Telescope file_browser<CR>')
-nmap('<leader>pf',':Telescope git_files theme=dropdown previewer=false hidden=true no_ignore=true<CR>')
-nmap('<leader>fg',':Telescope live_grep previewer=false<CR>')
+nmap('<leader>fg',':Telescope live_grep<CR>')
 nmap('<leader>fc',':Telescope grep_string<CR>')
 nmap('<leader>fj',':Telescope jumplist<CR>')
 nmap('<leader>km',':Telescope keymaps previewer=false<CR>')
 nmap('<leader>js',':Telescope lsp_document_symbols<CR>')
 nmap('<leader>bb',':Telescope buffers<CR>')
 nmap('<leader>rh',':Telescope registers<CR>')
-nmap('<leader>fb',':Telescope current_buffer_fuzzy_find previewer=false<CR>')
+--nmap('<leader>fb',':Telescope current_buffer_fuzzy_find previewer=false<CR>')
+nmap('<leader>fb',':Telescope file_browser<CR>')
 nmap('<leader>gd',':Telescope git_bcommits<CR>')
 nmap('<leader>gc',':Telescope git_commits<CR>')
+nmap('<leader>gb',':Telescope git_branches<CR>')
 nmap('<leader>jt',':Telescope treesitter<CR>')
 nmap('<leader>pl',':Telescope project theme=dropdown<CR>')
-nmap('<c-p>',':Telescope neoclip theme=cursor previewer=false <CR>')
-imap('<c-p>', '<cmd>Telescope neoclip theme=cursor previewer=false <CR>')
+nmap('<c-p>',':Telescope neoclip theme=dropdown <CR>')
+imap('<c-p>', '<cmd>Telescope neoclip theme=dropdown <CR>')
+nmap('<leader>td', ':TodoTelescope<CR>')
+
 
 -- TREE --
-nmap('<C-a>',':NvimTreeToggle<CR>')
+nmap('<A-a>',':NvimTreeToggle<CR>')
 
 -- MAP ESCAPE TO GO BACK TO NORMAL MODE IN TERMINAL --
 
@@ -138,6 +143,10 @@ nmap('<leader>yr', ':YodeCreateSeditorReplace<CR>')
 
 -- TROUBLE
 nmap('<leader>tt', ':TroubleToggle workspace_diagnostics<CR>')
+
+-- BUFFER HISTORY
+nmap('<leader>,', ':BufferHistoryForward<CR>')
+nmap('<leader>.', ':BufferHistoryBack<CR>')
 
 
 -- COC --
