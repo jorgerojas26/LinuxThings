@@ -1,6 +1,7 @@
 local cmp = require("cmp")
 local luasnip = require("luasnip")
 local lsp_installer = require("nvim-lsp-installer")
+local lspconfig = require("lspconfig")
 
 local press = function(key)
   vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes(key, true, true, true), "n", true)
@@ -143,7 +144,7 @@ tabnine:setup({
 	snippet_placeholder = '..';
 }) ]]
 
-local nvim_cmp_capabilities = require("cmp_nvim_lsp").update_capabilities(vim.lsp.protocol.make_client_capabilities())
+local nvim_cmp_capabilities = require("cmp_nvim_lsp").default_capabilities()
 
 local json_schemas = {
   {
@@ -188,81 +189,57 @@ local json_schemas = {
   },
 }
 
-local function organize_imports()
-  local params = {
-    command = "_typescript.organizeImports",
-    arguments = { vim.api.nvim_buf_get_name(0) },
-    title = "",
-  }
-  vim.lsp.buf.execute_command(params)
-end
+lsp_installer.setup()
 
-lsp_installer.on_server_ready(function(server)
-  local opts = {}
-  local is_efm = server.name == "efm"
-
-  opts.capabilities = nvim_cmp_capabilities
-  opts.root_dir = require("lspconfig").util.root_pattern("package.json", ".git", "init.lua")
-  opts.on_attach = function(client)
+lspconfig.tsserver.setup({
+  on_attach = function(client, bufnr)
+    require("nvim-navic").attach(client, bufnr)
     require("illuminate").on_attach(client)
-    client.resolved_capabilities.document_formatting = is_efm
-  end
+    client.server_capabilities.document_formatting = false
+    print("hola from tsserver on_attach")
+  end,
+  init_options = {
+    preferences = {
+      allowIncompleteCompletions = true,
+      includePackageJsonAutoImports = "on",
+    },
+  },
+  capabilities = nvim_cmp_capabilities,
+})
 
-  if server.name == "jsonls" then
-    opts.filetypes = { "json", "jsonc", "prettierrc" }
-    opts.settings = { json = { schemas = json_schemas } }
-  elseif server.name == "tsserver" then
-    opts.on_attach = function(client, bufnr)
-      -- local ts_utils = require("nvim-lsp-ts-utils")
-      require("nvim-navic").attach(client, bufnr)
-      require("illuminate").on_attach(client)
-      client.resolved_capabilities.document_formatting = is_efm
-      -- ts_utils.setup({})
-      -- ts_utils.setup_client(client)
-    end
-  elseif server.name == "cssmodules_ls" then
-    opts.on_attach = function(client)
-      client.resolved_capabilities.document_formatting = is_efm
-      client.resolved_capabilities.goto_definition = false
-    end
-    opts.init_options = {
+lspconfig.prismals.setup({
+  on_attach = function(client)
+    client.server_capabilities.document_formatting = true
+  end,
+  capabilities = nvim_cmp_capabilities,
+})
+
+--[[ lspconfig.cssmodules_ls.setup({
+  on_attach = function(client)
+    client.server_capabilities.document_formatting = false
+    client.server_capabilities.goto_definition = false
+  end,
+  flags = {
+    init_options = {
       camelCase = "dashes",
       hitName = "cssmodules",
-    }
-  elseif server.name == "prismals" then
-    opts.on_attach = function(client)
-      client.resolved_capabilities.document_formatting = true
-    end
-  elseif server.name == "efm" then
-    opts.root_dir = require("lspconfig").util.root_pattern("package.json", ".git", "init.lua")
-    opts.filetypes = vim.tbl_keys(languages)
-    opts.init_options = { documentFormatting = true }
-    opts.settings = { languages = languages }
-  end
-  server:setup(opts)
-end)
+    },
+  },
+  capabilities = nvim_cmp_capabilities,
+}) ]]
+
+lspconfig.jsonls.setup({
+  filetypes = { "json", "jsonc", "prettierrc" },
+  settings = { json = { schemas = json_schemas } },
+  capabilities = nvim_cmp_capabilities,
+})
 
 require("null-ls").setup({
   sources = {
     require("null-ls").builtins.formatting.stylua,
-    require("null-ls").builtins.formatting.prettierd.with({
-      filetypes = {
-        "html",
-        "typescriptreact",
-        "javascriptreact",
-        "css",
-        "scss",
-        "vue",
-        "markdown",
-        "jsonc",
-        "json",
-        "yaml",
-        "typescript",
-        "javascript",
-        "module.css",
-        "svg",
-      },
-    }),
+    require("null-ls").builtins.formatting.rome,
     require("null-ls").builtins.diagnostics.eslint_d,
   },
 })
+
+vim.lsp.handlers["textDocument/publishDiagnostics"] = function() end

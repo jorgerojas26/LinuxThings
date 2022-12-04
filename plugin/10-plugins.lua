@@ -1,13 +1,17 @@
 require("packer").startup(function(use)
+  use({
+    "glacambre/firenvim",
+    run = function()
+      vim.fn["firenvim#install"](0)
+    end,
+  })
+  use("christoomey/vim-tmux-navigator")
   use("lewis6991/impatient.nvim")
-  use({ "github/copilot.vim" })
+  --use({ "github/copilot.vim" })
   use("wbthomason/packer.nvim")
   use("kyazdani42/nvim-web-devicons")
-  use({ "rcarriga/nvim-notify" })
-  use({
-    "SmiteshP/nvim-navic",
-    requires = "neovim/nvim-lspconfig",
-  })
+  -- use({ "rcarriga/nvim-notify" })
+  use({ "SmiteshP/nvim-navic", requires = "neovim/nvim-lspconfig" })
   --use 'wakatime/vim-wakatime'
   use({ "nathom/filetype.nvim" })
   use({ "dhruvasagar/vim-buffer-history" })
@@ -33,18 +37,18 @@ require("packer").startup(function(use)
       require("modes").setup()
     end,
   })
-  use({ "monaqa/dial.nvim" })
-  use({
-    "folke/trouble.nvim",
-    requires = "kyazdani42/nvim-web-devicons",
-    config = function()
-      require("trouble").setup({
-        -- your configuration comes here
-        -- or leave it empty to use the default settings
-        -- refer to the configuration section below
-      })
-    end,
-  })
+  -- use({ "monaqa/dial.nvim" })
+  --[[ use({
+        "folke/trouble.nvim",
+        requires = "kyazdani42/nvim-web-devicons",
+        config = function()
+            require("trouble").setup({
+                -- your configuration comes here
+                -- or leave it empty to use the default settings
+                -- refer to the configuration section below
+            })
+        end,
+    }) ]]
   --[[ use { 'hoschi/yode-nvim', config = function()
             require('yode-nvim').setup({})
         end } ]]
@@ -75,10 +79,24 @@ require("packer").startup(function(use)
 
   -- TREE --
   -- use 'kyazdani42/nvim-tree.lua'
-  use({ "tamago324/lir.nvim" })
+  --use({ "tamago324/lir.nvim" })
+  -- use("elihunter173/dirbuf.nvim")
+  --use("tpope/vim-vinegar")
   -- MOTION --
-  use("phaazon/hop.nvim")
-  use("andymass/vim-matchup")
+  -- use("phaazon/hop.nvim")
+  use({
+    "ggandor/leap.nvim",
+    config = function()
+      require("leap").add_default_mappings()
+    end,
+  })
+  use({
+    "andymass/vim-matchup",
+    setup = function()
+      -- may set any options here
+      vim.g.matchup_matchparen_offscreen = { method = "popup" }
+    end,
+  })
   use("rhysd/clever-f.vim")
 
   -- TELESCOPE --
@@ -104,7 +122,7 @@ require("packer").startup(function(use)
   use("neovim/nvim-lspconfig")
   use("onsails/lspkind-nvim")
   use("williamboman/nvim-lsp-installer")
-  use({ "jose-elias-alvarez/nvim-lsp-ts-utils" })
+  -- use({ "jose-elias-alvarez/nvim-lsp-ts-utils" })
   --use {'neoclide/coc.nvim', branch = 'master', run = 'yarn install --frozen-lockfile'}
 
   -- CODE COMPLETION --
@@ -112,7 +130,6 @@ require("packer").startup(function(use)
   -- use { 'ms-jpq/coq.artifacts' }
   use("hrsh7th/nvim-cmp")
   use("hrsh7th/cmp-nvim-lsp")
-
   use("hrsh7th/cmp-nvim-lsp-signature-help")
   use("hrsh7th/cmp-buffer")
   use("hrsh7th/cmp-path")
@@ -160,12 +177,7 @@ require("packer").startup(function(use)
   -- use("honza/vim-snippets")
   --use 'mhinz/vim-startify'
   use("akinsho/toggleterm.nvim")
-  use({
-    "goolord/alpha-nvim",
-    config = function()
-      require("alpha").setup(require("alpha.themes.startify").opts)
-    end,
-  })
+  use({ "goolord/alpha-nvim" })
 
   -- CODE FORMATTER --
   --use 'mhartington/formatter.nvim'
@@ -289,6 +301,30 @@ require("packer").startup(function(use)
         end
     }
     use {'Pocco81/DAPInstall.nvim'} ]]
+  -- use({
+  --   "ggandor/flit.nvim",
+  --   config = function()
+  --     require("flit").setup()
+  --   end,
+  -- })
+
+  use("desdic/telescope-rooter.nvim")
+  use({
+    "prichrd/netrw.nvim",
+    config = function()
+      require("netrw").setup({})
+    end,
+  })
+  use("tpope/vim-vinegar")
+  use({ "rcarriga/vim-ultest", requires = { "vim-test/vim-test" }, run = ":UpdateRemotePlugins" })
+  use("vim-test/vim-test")
+  use("nvim-neotest/neotest-vim-test")
+  use({
+    "lewis6991/gitsigns.nvim",
+    config = function()
+      require("gitsigns").setup()
+    end,
+  })
 end, {
   config = {
     compile_path = vim.fn.stdpath("config") .. "/lua/packer_compiled.lua",
